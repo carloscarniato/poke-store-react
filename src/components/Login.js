@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { auth } from "../firebase";
 
 const Login = () => {
     const location = useLocation();
-    if (typeof(location.state) !== 'undefined') {
-        var message = location.state.message;
-    } else {
-        var message = '';
-    }
+    const [message, setMessage] = useState('');
+    useEffect(() => {  
+        if (typeof(location.state) !== 'undefined') {
+            setMessage(location.state.message);
+            location.state = undefined;
+        }
+    });
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
@@ -31,6 +34,7 @@ const Login = () => {
     };
 
     const onSubmitHandler = (event) => {
+        setMessage('');
         setError(null);
         event.preventDefault();
         signInWithEmailAndPasswordHandler(email, password)
