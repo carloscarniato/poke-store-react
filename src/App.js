@@ -2,6 +2,11 @@ import pokeball from './pokeball.png';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Link, Switch, Route } from 'react-router-dom';
+import Application from './components/Application';
+import Login from './components/Login';
+import SignUp from './components/SignUp';
+import PasswordReset from './components/PasswordReset';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -25,6 +30,13 @@ function App() {
       <div className="auth-wrapper">
         <div className="auth-inner">
         <img src={pokeball} className="App-logo" alt="logo" />
+        <Switch>
+          <Route exact path='/' component={Application} />
+          <Route path="/login" component={Login} />
+          <Route path="/sign-up" component={SignUp} />
+          <Route path="/forget-password" component={PasswordReset} />
+          <Route path="/home" component={Home} />
+        </Switch>
         </div>
       </div>
     </div>  
