@@ -2,7 +2,6 @@ import pokeball from './pokeball.png';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Link, Switch, Route } from 'react-router-dom';
-import Application from './components/Application';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import PasswordReset from './components/PasswordReset';
@@ -25,9 +24,9 @@ function App() {
 
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
+      <nav className="navbar navbar-expand-lg navbar-dark navbar-static-top">
         <div className="container">
-          <Link className="navbar-brand" to={"/login"}>Poke Store</Link>
+          <Link className="navbar-brand" to={currentUser ? "/home" : "/login"}>Poke Store</Link>
           <button className="navbar-toggler" type="button" onClick={toggleMenu}>
         <span className="navbar-toggler-icon"></span>
         </button>
@@ -51,7 +50,7 @@ function App() {
       </nav>
 
       <div className="auth-wrapper">
-        <div className="auth-inner">
+        <div className="auth-inner" style={{width: currentUser ? '1000px' : ''}}>
         <img src={pokeball} className="App-logo" alt="logo" />
         <Switch>
           <AuthRoute exact path='/' component={Login} />
