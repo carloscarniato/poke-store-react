@@ -105,32 +105,46 @@ h1,h2,h3,h4,h5,h6,label,span {
   padding: 10px;
   margin-bottom: 30px;
 
-  }
+}
 
-  .search_input{
-  color: white;
-  border: 0;
-  outline: 0;
-  background: none;
-  width: 0;
-  caret-color:transparent;
-  line-height: 40px;
-  padding: 0 10px;
-  width: 450px;
-  caret-color:red;
-  }
+.search_input{
+color: white;
+border: 0;
+outline: 0;
+background: none;
+width: 0;
+caret-color:transparent;
+line-height: 40px;
+padding: 0 10px;
+width: 450px;
+caret-color:red;
+}
 
 
-  .search_icon{
+.search_icon{
+height: 40px;
+width: 40px;
+float: right;
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 50%;
+color:white;
+text-decoration:none;
+background: white;
+color: #ed1c24;
+}
+
+.add_lista, .add_lista:hover {
   height: 40px;
   width: 40px;
-  float: right;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  color:white;
+  color:e74c3c;
   text-decoration:none;
-  background: white;
-  color: #e74c3c;
-  }
+  background: #ed1c24;
+  color: #ffffff;
+  margin-bottom: 20px;
+}

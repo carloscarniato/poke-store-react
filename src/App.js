@@ -11,6 +11,7 @@ import { useContext, useState } from 'react';
 import { AuthContext } from './provider/AuthProvider';
 import { auth } from './firebase';
 import AuthRoute from './AuthRoute';
+import Listas from './components/Listas';
 
 function App() {
   const {currentUser} = useContext(AuthContext);
@@ -40,9 +41,12 @@ function App() {
               </li>
             </ul>) : (
               <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link className="nav-link" to={"/"} onClick={() => auth.signOut()} >Sair</Link>
-              </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/listas"}>Minhas Listas</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to={"/"} onClick={() => auth.signOut()} >Sair</Link>
+                </li>
               </ul>
             )}
           </div>
@@ -58,6 +62,7 @@ function App() {
           <AuthRoute path="/sign-up" component={SignUp} />
           <AuthRoute path="/forget-password" component={PasswordReset} />
           <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/listas" component={Listas} />
         </Switch>
         </div>
       </div>
