@@ -8,20 +8,30 @@ import SignUp from './components/SignUp';
 import PasswordReset from './components/PasswordReset';
 import Home from './components/Home';
 import PrivateRoute from './PrivateRoute';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from './provider/AuthProvider';
 import { auth } from './firebase';
 import AuthRoute from './AuthRoute';
 
 function App() {
   const {currentUser} = useContext(AuthContext);
+  const [menu, setMenu] = useState(false);
+
+  const toggleMenu = () =>{
+    setMenu(!menu);
+  }
+
+  const show = menu ? "show" : "" ;
 
   return (
     <div className="App">
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
         <div className="container">
           <Link className="navbar-brand" to={"/login"}>Poke Store</Link>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <button className="navbar-toggler" type="button" onClick={toggleMenu}>
+        <span className="navbar-toggler-icon"></span>
+        </button>
+          <div className={"collapse navbar-collapse " + show } id="navbarTogglerDemo02">
             {!currentUser ? (<ul className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link className="nav-link" to={"/login"}>Entrar</Link>
