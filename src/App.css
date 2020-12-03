@@ -11,9 +11,9 @@
 }
 
 .App-logo {
-  height: 8vmin;
+  height: 50px;
   pointer-events: none;
-  margin: 10px auto 10px auto;
+  margin: 10px auto 15px auto;
   display: flex;
 }
 
@@ -48,6 +48,12 @@ h1,h2,h3,h4,h5,h6,label,span {
   justify-content: center;
   flex-direction: column;
   text-align: left;
+}
+
+@media screen and (max-width: 1000px) {
+  .auth-wrapper, .auth-inner {
+    width: 100% !important;
+  }
 }
 
 .auth-inner {
@@ -89,3 +95,42 @@ h1,h2,h3,h4,h5,h6,label,span {
 .forgot-password a {
   color: #ed1c24;
 }
+
+.searchbar{
+  margin-bottom: auto;
+  margin-top: auto;
+  height: 60px;
+  background-color: #353b48;
+  border-radius: 30px;
+  padding: 10px;
+  margin-bottom: 30px;
+
+  }
+
+  .search_input{
+  color: white;
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 0;
+  caret-color:transparent;
+  line-height: 40px;
+  padding: 0 10px;
+  width: 450px;
+  caret-color:red;
+  }
+
+
+  .search_icon{
+  height: 40px;
+  width: 40px;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  color:white;
+  text-decoration:none;
+  background: white;
+  color: #e74c3c;
+  }
