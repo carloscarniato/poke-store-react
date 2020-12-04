@@ -122,8 +122,8 @@ const Home = () => {
         });
     }
 
-    const getPaginatedPokemon = () => {
-        fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=" + (20 * page))
+    const getPaginatedPokemon = (paginated) => {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=" + (20 * paginated))
         .then(res => res.json())
         .then(
           (result) => {
@@ -146,7 +146,26 @@ const Home = () => {
     }
 
     useEffect(() => {
-        getPaginatedPokemon();
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
+        .then(res => res.json())
+        .then(
+          (result) => {
+            result.results.forEach(
+                (pokemon) => {
+                      fetchPokemonData(pokemon);   
+                  }
+              );
+
+          },
+          // Nota: é importante lidar com errros aqui
+          // em vez de um bloco catch() para não receber
+          // exceções de erros reais nos componentes.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+        setIsLoaded(true)
         getLists();
 
     }, [])
@@ -154,7 +173,7 @@ const Home = () => {
     const proximo = () => {
         setPage(page + 1);
         setItems([]);
-        return getPaginatedPokemon();
+        return getPaginatedPokemon(page + 1);
     }
 
     const anterior = () => {
@@ -163,7 +182,7 @@ const Home = () => {
         }
         setPage(page - 1);
         setItems([]);
-        return getPaginatedPokemon();
+        return getPaginatedPokemon(page - 1);
     }
 
     if (error) {
