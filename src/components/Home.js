@@ -18,6 +18,7 @@ const Home = () => {
     const [message, setMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState(null);
     const [exist, setExist] = useState(false);
+    const [page, setPage] = useState(0);
 
     const fetchPokemonData = (pokemon) => {
         let url = pokemon.url;
@@ -121,29 +122,68 @@ const Home = () => {
         });
     }
 
-    useEffect(() => {
-        fetch("https://pokeapi.co/api/v2/pokemon")
-          .then(res => res.json())
-          .then(
-            (result) => {
-              result.results.forEach(
-                  (pokemon) => {
-                        fetchPokemonData(pokemon);   
-                    }
-                );
+    const getPaginatedPokemon = (paginated) => {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=" + (20 * paginated))
+        .then(res => res.json())
+        .then(
+          (result) => {
+            result.results.forEach(
+                (pokemon) => {
+                      fetchPokemonData(pokemon);   
+                  }
+              );
 
-            },
-            // Nota: é importante lidar com errros aqui
-            // em vez de um bloco catch() para não receber
-            // exceções de erros reais nos componentes.
-            (error) => {
-              setIsLoaded(true);
-              setError(error);
-            }
-          );
-          setIsLoaded(true)
-          getLists();
+          },
+          // Nota: é importante lidar com errros aqui
+          // em vez de um bloco catch() para não receber
+          // exceções de erros reais nos componentes.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+        setIsLoaded(true)
+    }
+
+    useEffect(() => {
+        fetch("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
+        .then(res => res.json())
+        .then(
+          (result) => {
+            result.results.forEach(
+                (pokemon) => {
+                      fetchPokemonData(pokemon);   
+                  }
+              );
+
+          },
+          // Nota: é importante lidar com errros aqui
+          // em vez de um bloco catch() para não receber
+          // exceções de erros reais nos componentes.
+          (error) => {
+            setIsLoaded(true);
+            setError(error);
+          }
+        );
+        setIsLoaded(true)
+        getLists();
+
     }, [])
+
+    const proximo = () => {
+        setPage(page + 1);
+        setItems([]);
+        return getPaginatedPokemon(page + 1);
+    }
+
+    const anterior = () => {
+        if (page == 0) {
+            return;
+        }
+        setPage(page - 1);
+        setItems([]);
+        return getPaginatedPokemon(page - 1);
+    }
 
     if (error) {
     return <div>Error: {error.message}</div>;
@@ -169,6 +209,12 @@ const Home = () => {
                     <input onChange={event => onChangeHandler(event)} className="search_input" type="text" name="search" placeholder="Pesquisar..."></input>
                     <button type="submit" href="#" className="search_icon"><FontAwesomeIcon icon={faSearch}></FontAwesomeIcon></button>
                 </form>
+            </div>
+
+            <div className="row justify-content-center next">
+                <button className="btn btn-danger" onClick={() => anterior()}>Anterior</button>
+                <br></br>
+                <button className="btn btn-danger" onClick={() => proximo()}>Próximo</button>
             </div>
             <div className="row justify-content-center">
                 {items.map(item => (
