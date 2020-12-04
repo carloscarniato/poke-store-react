@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import pokeball from '../pokeball.png';
 
 const PasswordReset = () => {
     const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ const PasswordReset = () => {
     };
     return (
       <div>
+      <img src={pokeball} className="App-logo" alt="logo" />
+
       {emailHasBeenSent && (
               <div className="py-3 bg-green-400 w-full text-white text-center mb-3">
                 O email foi enviado com sucesso!

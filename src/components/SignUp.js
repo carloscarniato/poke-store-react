@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { auth, generateUserDocument } from "../firebase";
+import pokeball from '../pokeball.png';
 
 const SignUp = () => {
     const history = useHistory();
@@ -38,6 +39,8 @@ const SignUp = () => {
 
     return (
         <div>
+            <img src={pokeball} className="App-logo" alt="logo" />
+
             {error !== null && (
                 <div className="alert alert-danger text-center">
                 {error}
@@ -57,7 +60,7 @@ const SignUp = () => {
 
                 <div className="form-group">
                     <label>Senha</label>
-                    <input type="password" value={password} name="userPassword" id="userPassword" className="form-control" onChange={event => onChangeHandler(event)} required />
+                    <input minLength="6" type="password" value={password} name="userPassword" id="userPassword" className="form-control" onChange={event => onChangeHandler(event)} required />
                 </div>
 
                 <button 

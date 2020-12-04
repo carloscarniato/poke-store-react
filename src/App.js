@@ -1,4 +1,3 @@
-import pokeball from './pokeball.png';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { Link, Switch, Route } from 'react-router-dom';
@@ -55,7 +54,6 @@ function App() {
 
       <div className="auth-wrapper">
         <div className="auth-inner" style={{width: currentUser ? '1000px' : ''}}>
-        <img src={pokeball} className="App-logo" alt="logo" />
         <Switch>
           <AuthRoute exact path='/' component={Login} />
           <AuthRoute path="/login" component={Login} />
