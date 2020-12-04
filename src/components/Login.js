@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { auth } from "../firebase";
+import pokeball from '../pokeball.png';
 
 const Login = () => {
     const location = useLocation();
@@ -42,6 +43,7 @@ const Login = () => {
 
     return (
         <div>
+            <img src={pokeball} className="App-logo" alt="logo" />
             {message !== '' && (
                 <div className="alert alert-success text-center">
                   {message}
